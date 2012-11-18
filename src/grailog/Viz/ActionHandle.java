@@ -12,9 +12,16 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import java.io.*;
+
+
+/**
+ * This class generates the GUI.
+ * @author Zhang
+ *
+ */
 public class ActionHandle{
 	//=====================================================
-	String InputPath = "C:\\Users\\Akbari\\InputRules.txt"; 
+	String InputPath = "InputRules.txt"; 
 	//=====================================================
 	private JFrame frame=new JFrame("GRAILOG VISUALIZER");
 	private JButton showparts=new JButton("Show Splits");
@@ -70,12 +77,12 @@ public class ActionHandle{
 		        	s.saperate_body();
 		        	s.saperate_head();
 		        	
-        			System.out.println("The result of seperate rules:the body part");
-					for(int i=0;i<s.p;i++)
-						System.out.println(s.class_node_label_edge_body[i][0]+'\t'+s.class_node_label_edge_body[i][1]+'\t'+s.class_node_label_edge_body[i][2]+'\t'+s.class_node_label_edge_body[i][3]);
-					System.out.println("The result of seperate rules:the head part");
-					for(int j=0;j<s.q;j++)
-						System.out.println(s.class_node_label_edge_head[j][0]+'\t'+s.class_node_label_edge_head[j][1]+'\t'+s.class_node_label_edge_head[j][2]+'\t'+s.class_node_label_edge_head[j][3]);
+        			///System.out.println("The result of seperate rules:the body part");
+					//for(int i=0;i<s.p;i++)
+						//System.out.println(s.class_node_label_edge_body[i][0]+'\t'+s.class_node_label_edge_body[i][1]+'\t'+s.class_node_label_edge_body[i][2]+'\t'+s.class_node_label_edge_body[i][3]);
+					//System.out.println("The result of seperate rules:the head part");
+					//for(int j=0;j<s.q;j++)
+						//System.out.println(s.class_node_label_edge_head[j][0]+'\t'+s.class_node_label_edge_head[j][1]+'\t'+s.class_node_label_edge_head[j][2]+'\t'+s.class_node_label_edge_head[j][3]);
 					try {
 				        BufferedWriter out = new BufferedWriter(new FileWriter(InputPath));//to this path
 				        out.write("body parts:\r\n");

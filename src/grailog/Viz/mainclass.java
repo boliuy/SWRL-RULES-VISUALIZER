@@ -5,12 +5,13 @@ package grailog.Viz;
 import java.io.*;
 
 
+/**
+ * @author Akbari
+ * method main calls a new instance of class ActionHnadle.
+ */
 public class mainclass {
 	
-	/**
-	 * This is the main method of the project  
-	 * 
-	 */	
+
 public static void main(String arg[]) throws IOException{
 	
 	new ActionHandle();

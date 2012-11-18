@@ -1,5 +1,12 @@
 package grailog.Viz;
 import java.lang.String;
+
+
+/**
+ * This class splits the input SWRL rule
+ * @author Zhang
+ *
+ */
 public class swrl_saperate{
 	private String total;
 	public  String[] body_head= new String[2];
@@ -9,16 +16,30 @@ public class swrl_saperate{
 	public  String[][] class_node_label_edge_head=new String[100][4];
 	public int p,q,r;//to calculate the number of  
 	
+	
 	public swrl_saperate(String rule)//initialize&insert the total rule
 	{
 		this.total=rule;
 	}
+	
+//==============================
+	
+	
+	/**
+	 * Separates body and head(conclusion) part of swrl rule
+	 * @return : returns body and head(conclusion) parts of swrl rule in an array
+	 */
 	public String[] saperate_body_head()//body and head(conclusion) part of swrl rules separate
 	{
 		if(total.indexOf("->")!=-1)
 		    this.body_head=this.total.split("->");
 		return this.body_head;
 	}
+	
+	/**
+	 * splits the body part based on symbol "^"
+	 * @return : returns the body axioms of a rule in an array
+	 */
 	public String[] split_body()//split the body part by symbol "^" 
 	{
 		if(body_head[0].indexOf("^")!=-1)
@@ -30,6 +51,10 @@ public class swrl_saperate{
 
 		return this.body;
 	}
+	/**
+	 * same as the split_body method
+	 * @return : returns the head axioms of a rule in an array
+	 */
 	public String[] split_head()//the same as the split_body method
 	{
 		if(body_head[1].indexOf("^")!=-1)
@@ -43,19 +68,30 @@ public class swrl_saperate{
 	}
 	
 	
+	/**
+	 * Returns the body of a SWRL rule as a string.
+	 * @return : Returns the body of a SWRL rule as a string.
+	 */
 	public String get_body()
 	{
 		String body=body_head[0];
 		return body.trim();
 	}
 		
+    /**
+     * Returns the conclusion of a SWRL rule as a string.
+     * @return :Returns the conclusion of a SWRL rule as a string.
+     */
     public String get_conclusion()
     {
     	String conclusion=body_head[1];
     	return conclusion.trim();
     }
 
-       public void saperate_body()//for each string,if test no "," ,its the unary predicate,else its the binary predicate
+    /**
+     * Determines the relations and their arguments in the body 
+     */
+    public void saperate_body()//for each string,if test no "," ,its the unary predicate,else its the binary predicate
     {
        String [] n_c=new String[2];
        String [] n_l=new String[2];
@@ -103,7 +139,10 @@ public class swrl_saperate{
     	}
         
     }
-       public void saperate_head()//the same as saperate_body method
+       /**
+     * Determines the relations and their arguments in the head
+     */
+    public void saperate_head()//the same as saperate_body method
        {
           String [] n_c=new String[2];
           String [] n_l=new String[2];

@@ -11,14 +11,31 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
+
+
+/**
+ * This class generates the .dot file needed by graphviz. It reads the input
+ * data from the InputRules.txt text file. 
+ * The generated .dot file will be saved on disk in the same directory as InputRules.txt
+ * with name output.["output format extension"].dot  
+ * @author Akbari
+ */
+
 public class GenDot {
 	
 	String [][] bodies = new String [100][4];
 	String [][] heads = new String [100][4];
-	String inputpath = "C:\\Users\\Akbari\\InputRules.txt";
-	String outputpath = "C:\\Users\\Akbari\\output.dot";	
+	String inputpath = "InputRules.txt";
+	String outputpath = "output.dot";	
 	
 //==================================================================
+	
+/**
+ * This method returns an array of the objects in the rule.
+ * @param bodies : this bodies array contains the body axioms of the input rule
+ * @param heads : this bodies array contains the conclusion axioms of the input rule
+ * @return : returns an array of the objects in the rule.
+ */
 private String [] getObjects(String [][] bodies, String [][] heads){
 	String [] objects = new String [bodies.length+heads.length];
 	int i,objindex=0;
@@ -31,6 +48,13 @@ private String [] getObjects(String [][] bodies, String [][] heads){
 	return objects;
 }
 //==================================================================
+
+
+/**
+ * This method determines if a specified node is an object or not.
+ * @param node : a specified node in the graph
+ * @return : if the node is an object returns true, otherwise returns false. 
+ */
 private boolean isObject(String node){
 	String [] objects =  getObjects(bodies, heads);
 	int i;
@@ -41,6 +65,13 @@ private boolean isObject(String node){
 }
 
 //==================================================================
+
+/**
+ * This method generates the input .dot file required by graphviz and save it to the disk. 
+ * Then asks graphiz to use it as input and make the output file.  
+ * @param outformat : is the output format that user likes to be generated.
+ * @throws IOException 
+ */
 public void genDotFile(String outformat) throws IOException{
 		
 		for(int i=0; i<100; i++)
@@ -133,19 +164,19 @@ public void genDotFile(String outformat) throws IOException{
 		//cmd[0] = "C:\\Program Files\\Graphviz 2.28\\bin\\dot.exe";
 		cmd[0] = "dot";
 		cmd[1] = "-T"+ outformat;
-		cmd[2] = "C:\\Users\\Akbari\\output.dot";
+		cmd[2] = "output.dot";
 		cmd[3] = "-O";
 		
 		try{
 			Runtime rt = Runtime.getRuntime();
-			System.out.println("Executing dot.exe ....");
+			//System.out.println("Executing dot.exe ....");
 			Process pr = rt.exec(cmd);
 			// any error???
 	        int exitVal = pr.waitFor();
-	        System.out.println("ExitValue: " + exitVal);
+	        //System.out.println("ExitValue: " + exitVal);
 			
 	        //=========OPENING THE OUTPUT .PNG FILE ==============================
-	        File image = new File("C:\\users\\akbari\\output.dot."+ outformat);
+	        File image = new File("output.dot."+ outformat);
 			Desktop desktop = Desktop.getDesktop();
 			desktop.open(image);
 		}
