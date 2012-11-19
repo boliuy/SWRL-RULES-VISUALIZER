@@ -1,0 +1,16 @@
+1.(MEDIUM)Individuals under the age of 18 are a potential driver of a vehicle with a weight of less than 26,000 lbs in California if they possess an out-of-state driver’s license and are visiting the state for less than 10 days.
+SWRL:Person(?p) ^ has_Driver_License(?p,?d) ^ issued_in_state_of(?d,?s)  ^
+     swrlb:notEqual(?s,"CA") ^ hasAge(?p,?g) ^
+     swrlb:lessThan(?g,18) ^ Number_of_Visiting_Days_in_CA(?p,?x) ^
+     swrlb:lessThan(?x,10) ^ Car(?c)  ^
+     has_weight_in_lbs(?c,?w) ^ swrlb:lessThan(?w,26000) -> Can_Drive(?p,?c)
+
+2.(SIMPLE)
+Person(?x) ^ Man(?y) ^ hasSibling(?x,?y) ^
+hasAge(?x,?agel) ^ hasAge(?y,?age2) ^
+swrlb:greaterThan(?age2,?age1) ->
+hasOlderBrother(?x,?y)
+
+3.(DEFFICULT)
+An alert will  be turned on or not by using the gps to test the speed of the car if it's enough or not to across the road when considered the  traffic light.
+Car(?car) ^ hasGPS(?car, ?gps1) ^ hasLongitude(?gps1, ?gps1Longitude) ^ hasLatitude(?gps1, ?gps1Latitude) ^ TrafficLight(?trafficLight) ^ hasSignal(?trafficLight, ?signal) ^ swrlb:equal(?signal, "Green") ^ hasGPS(?trafficLight, ?gps2) ^ hasLongitude(?gps2, ?gps2Longitude) ^ hasLatitude(?gps2, ?gps2Latitude)  ^ gps:computeDistance(?gps1Longitude, ?gps1Latitude, ?gps2Longitude, ?gps2Latitude, ?distance)  ^ swrlb:lessThan(?distance, 100)  ^ hasSpeed(?car, ?carSpeed)  ^ swrlb:divide(?carTime, ?distance, ?carSpeed)  ^ hasRemainingTime(?trafficLight, ?remainingTime)  ^ swrlb:greaterThan(?carTime, ?remainingTime)  ^ swrlx:createOWLThing(?alert, "Alert") -> Alert(?alert)  ^ hasVehicle(?alert, ?car)  ^ hasTrafficLight(?alert, ?trafficLight)
