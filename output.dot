@@ -1,0 +1,13 @@
+digraph G {
+	 node [shape=box];
+	 edge [color=RED];
+	 Person [shape=oval];
+	 Person -> x;
+	 Man [shape=oval];
+	 Man -> y;
+	 x -> y [label="hasSibling"];
+	 x -> agel [dir=both,arrowtail=dot,label="hasAge"];
+	 y -> age2 [dir=both,arrowtail=dot,label="hasAge"];
+	 age2 -> age1 [label="swrlb:greaterThan"];
+	 x -> y [color=green,label="hasOlderBrother"];
+}
